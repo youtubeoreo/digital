@@ -89,7 +89,14 @@ void setup()  // Set up code called once on start-up
 a
 void loop()  // Main code, to run repeatedly
 {
-  // Speak some text
+// Sing a song
+  emicSerial.print("D3\n");
+  digitalWrite(ledPin, HIGH);         // Turn on LED while Emic is outputting audio
+  while (emicSerial.read() != ':');   // Wait here until the Emic 2 responds with a ":" indicating it's ready to accept the next command
+  digitalWrite(ledPin, LOW);
+
+/*
+// Speak some text
   emicSerial.print('S');
   //emicSerial.print("Hello. My name is the Emic 2 Text-to-Speech module. I would like to sing you a song.");  // Send the desired string to convert to speech
   emicSerial.print("I don't know what to say whatever greg.");
@@ -98,88 +105,11 @@ void loop()  // Main code, to run repeatedly
   digitalWrite(ledPin, HIGH);         // Turn on LED while Emic is outputting audio
   while (emicSerial.read() != ':');   // Wait here until the Emic 2 responds with a ":" indicating it's ready to accept the next command
   digitalWrite(ledPin, LOW);
-    
+*/  
   delay(500);    // 1/2 second delay
     
-         Rotate(30); // rotate at 30% power
-     delay(2000); // keep on doing this for 2 seconds or 2000 milliseconds
 
-
-     Rotate(-30); // Rotate the other way
-     delay(1000); // for 1 second
-
-
-     Forward(100); // Full steam ahead!
-     delay(3000); // for 3 seconds
-
-
-     Backward(50); // 50% power backwards
-     delay(500); // for half-a-second
-
- 
-     Stop(); // stop the wheels
-     delay(4000); // for 4 seconds
-  // Sing a song
-  emicSerial.print("D3\n");
-  digitalWrite(ledPin, HIGH);         // Turn on LED while Emic is outputting audio
-  while (emicSerial.read() != ':');   // Wait here until the Emic 2 responds with a ":" indicating it's ready to accept the next command
-  digitalWrite(ledPin, LOW);
 
  
 }
 
-
-
-
-
-
-void Forward(int speed)
-{
-    attachServos(); //in case we disconnected them
-     
-    speed = (int) (speed/100.0*90.0 + 90) ;  // translates it to servo-speak (servo input is from 0-180)
-    LeftWheel.write(speed);             
-    RightWheel.write(-speed); // Right wheel is backwards    
-}
-
-
-
-void Backward (int speed)
-{
-    attachServos(); //in case we disconnected them
-     
-    speed = (int) (speed/100.0*90.0 + 90) ;  // translates it to servo-speak (servo input is from 0-180)
-    LeftWheel.write(-speed);             
-    RightWheel.write(speed); // Right wheel is backwards    
-}
-
-
-
-void Rotate (int speed)
-{
-    attachServos(); //in case we disconnected them
-     
-    speed = (int) (speed/100.0*90.0 + 90) ;  // translates it to servo-speak (servo input is from 0-180)
-    LeftWheel.write(speed);             
-    RightWheel.write(speed); // Right wheel is backwards    
-}
-
-
-void Stop()
-{
-  LeftWheel.detach();
-  RightWheel.detach();
-}
-
-
-
-
-
-
-
-void attachServos()
-{
-   LeftWheel.attach(LWPin);
-   RightWheel.attach(RWPin);
-
-}
