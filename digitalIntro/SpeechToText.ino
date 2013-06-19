@@ -28,10 +28,6 @@
 SoftwareSerial emicSerial =  SoftwareSerial(rxPin, txPin);
 
 
-#include <Servo.h> 
-
-
-
 
 
 
@@ -58,7 +54,7 @@ void setup()  // Set up code called once on start-up
   delay(10);                          // Short delay
   emicSerial.flush();                 // Flush the receive buffer
 }
-a
+
 void loop()  // Main code, to run repeatedly
 {
 // Sing a song
