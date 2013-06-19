@@ -28,32 +28,7 @@
 SoftwareSerial emicSerial =  SoftwareSerial(rxPin, txPin);
 
 
-
-// This code is based on a program called "Sweep"
-// by BARRAGAN <http://barraganstudio.com> 
-// (which is an example placed in the public domain found under the example menu of the Arduino IDE)
-// and we also utilize the Servo.h Library
-
-//Creative commons license for my modifications
-//
-//I created additional functions created for handling continuous-rotation-servos as motors
-//Forward, Backward, Stop, Stop, and attachServo
-//by Gregory Kielian  < www.kielian.net > 
-//Special thanks to Chris Newton for his mentoring and help debugging the first drafts
-
-
 #include <Servo.h> 
- 
-Servo LeftWheel;  // create servo object to control a servo 
-Servo RightWheel;  // create servo object to control a servo 
-
-// Note: a maximum of eight servo objects can be created 
-
-int LWPin = 9; //set the pin number for your left servo-motors (just change the number if not pin 9)
-int RWPin = 10; //right-wheel control pin
-
- 
-
 
 
 
@@ -62,9 +37,6 @@ int RWPin = 10; //right-wheel control pin
 
 void setup()  // Set up code called once on start-up
 {
-  // define pin modes
-  LeftWheel.attach( LWPin );  //  Connects LeftWheel to the pin LWPin
-  RightWheel.attach( RWPin );  // Connects another wheel to be controlled by the pin RWPin
 
   pinMode(ledPin, OUTPUT);
   pinMode(rxPin, INPUT);
