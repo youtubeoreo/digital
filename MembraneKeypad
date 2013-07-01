@@ -1,3 +1,16 @@
+/*  Distributed as free-for-all code by TechLab Education.
+ *  techlabeducation.com
+ *
+ *  This is a basic set of functions for using a 4 x 4 16-key membrane keyboard. The pins are wired
+ *  to the membrane switch left-to-right, where the leftmost membrane pin is connected to 2, and the rightmost
+ *  membrane pin is connected to 9. 
+ *
+ *  This code uses Greg's nifty trick to set an input pin to an output pin and write LOW to it before reading from it,
+ *  which drains all the current that accumulates on it from previous reads.
+ *
+ *  By { greg, keshav } @techlabeducation.com
+ *  
+ */
 
 boolean keypad[4][4];
 
