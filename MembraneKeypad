@@ -1,0 +1,97 @@
+
+boolean keypad[4][4];
+
+void setup() {
+  Serial.begin(9600);
+  for (int i = 2 ; i <= 5 ; i++) {
+    pinMode(i, OUTPUT);
+    digitalWrite(i, LOW);
+  }
+}
+
+void refreshKeypad() {
+  for (int y = 2 ; y <= 5 ; y++) {
+     for (int x = 6 ; x <= 9 ; x++) {
+        pinMode(y, OUTPUT);
+        digitalWrite(y, LOW);
+        delay(1);
+        pinMode(y, INPUT);
+        digitalWrite(x, HIGH);
+        keypad[x - 6][y - 2] = (digitalRead(y) == HIGH) ? true : false;
+        digitalWrite(x, LOW);
+     } 
+  }
+  delay(10); // debouncing
+}
+
+boolean isKeyPressed(char key) {
+  switch(key) {
+    case '1': return keypad[0][0];
+    case '2': return keypad[1][0];
+    case '3': return keypad[2][0];
+    case '4': return keypad[1][0];
+    case '5': return keypad[1][1];
+    case '6': return keypad[1][2];
+    case '7': return keypad[2][0];
+    case '8': return keypad[2][1];
+    case '9': return keypad[2][2];
+    case 'A': return keypad[3][0];
+    case 'B': return keypad[3][1];
+    case 'C': return keypad[3][2];
+    case 'D': return keypad[3][3];
+    case '*': return keypad[0][3];
+    case '#': return keypad[2][3];
+    default:  return false;
+  }
+}
+
+char getKey(int x, int y) {
+  switch (x) {
+    case 0: 
+    switch (y) {
+      case 0:  return '1';
+      case 1:  return '4';
+      case 2:  return '7';
+      case 3:  return '*';
+      default: return ' ';  
+    }
+    case 1:
+    switch (y) {
+      case 0:  return '2';
+      case 1:  return '5';
+      case 2:  return '8';
+      case 3:  return '0';
+      default: return ' ';  
+    }
+    case 2:
+    switch (y) {
+      case 0:  return '3';
+      case 1:  return '6';
+      case 2:  return '9';
+      case 3:  return '#';
+      default: return ' ';  
+    }
+    case 3:
+    switch (y) {
+      case 0:  return 'A';
+      case 1:  return 'B';
+      case 2:  return 'C';
+      case 3:  return 'D';
+      default: return ' ';  
+    }
+    default: return ' ';
+  }
+}
+
+void loop() {
+  refreshKeypad();
+  for (int x = 0 ; x < 4 ; x++) {
+     for (int y = 0 ; y < 4 ; y++) {
+        if (keypad[x][y]) {
+          Serial.print("Pressed: ");
+          Serial.println(getKey(x, y));
+        }
+     } 
+  }
+  delay(100);
+}
